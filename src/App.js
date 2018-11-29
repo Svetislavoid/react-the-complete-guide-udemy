@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Radium, { StyleRoot } from 'radium'
 import Person from './Person/Person'
 
 class App extends Component {
@@ -8,7 +9,8 @@ class App extends Component {
   state = {
     persons: [
       {id: 'sljkdf', name: 'Đoka', age: '123'},
-      {id: 'xcvihi', name: 'Stoka', age: '541'}
+      {id: 'xcvihi', name: 'Stoka', age: '541'},
+      {id: 'ygnxvb', name: 'Milojko', age: '159'}
     ],
     showPersons: false
   }
@@ -45,11 +47,16 @@ class App extends Component {
   render() {
 
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
     let persons = null;
@@ -67,21 +74,39 @@ class App extends Component {
           })}
         </div>
       );
+
+      style.backgroundColor = 'red';
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      };
+    }
+
+    const classes = [];
+
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
+    }
+
+    if (this.state.persons.length <= 1) {
+      classes.push('bold');
     }
 
     return (
-      <div className="App">
-        <h1>Hi!</h1>
-        <h3>Ho</h3>
-        <button
-          style={style}
-          onClick={this.togglePersonsHandler}>Toggle Persons</button>
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>Hi!</h1>
+          <h3 className={classes.join(' ')}>Ho</h3>
+          <button
+            style={style}
+            onClick={this.togglePersonsHandler}>Toggle Persons</button>
+          {persons}
+        </div>
+      </StyleRoot>
     );
     // Ovo ispod je ustvari ono u šta se renderuje JSX kod
     // return React.createElement('div', {className: 'App'}, React.createElement('h3', null, 'Howdy hoo!'));
   }
 }
 
-export default App;
+export default Radium(App);
