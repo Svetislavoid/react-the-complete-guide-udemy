@@ -2,11 +2,7 @@ import React from 'react';
 import classes from './Person.module.css';
 
 const person = (props) => {
-    const rnd = Math.random();
 
-    if (rnd > 0.7) {
-        throw new Error('Something went kaput!'); // Simuliramo error
-    }
     return (
         <div className={classes.Person}>
             <p onClick={props.click}>I am a person (I think).</p>
