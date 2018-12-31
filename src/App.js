@@ -10,7 +10,7 @@ class App extends Component {
                     <BurgerBuilder />
                 </Layout>
             </div>
-      );
+        );
     }
 }
 
